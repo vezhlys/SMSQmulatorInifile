@@ -1,6 +1,6 @@
 # Inifile
 
-Dependency for [SMSQmulator](https://github.com/vezhlys/SMSQmulator "SMSQmulator). Holds map of program options which can be overridden by reading/writing values from/to SMSQmulator.ini. In theory this library can be used for other projects though it probably partially overlaps with java own Properties.
+Dependency for [SMSQmulator](https://github.com/vezhlys/SMSQmulator "SMSQmulator"). Holds map of program options which can be overridden by reading/writing values from/to SMSQmulator.ini. In theory this library can be used for other projects though it probably partially overlaps with java own Properties.
 
 More info from original author can be found by generating javadoc.
 
