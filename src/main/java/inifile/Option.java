@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author and copyright (C) Wolfgang Lenerz 2011-2015
  */
 @SuppressWarnings("serial")
-public class Option implements Serializable {
+public final class Option implements Serializable {
 
 	/**
 	 * The name of the option. This is trimmed, so that there are no leading or
@@ -85,7 +85,7 @@ public class Option implements Serializable {
 	 * @param value
 	 *            the string to set as value.
 	 */
-	public final void setValue(final String value) {
+	public void setValue(final String value) {
 		this.value = value;
 	}
 
@@ -95,7 +95,7 @@ public class Option implements Serializable {
 	 * @param description
 	 *            the string to set as description.
 	 */
-	public final void setDescription(final String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -105,7 +105,7 @@ public class Option implements Serializable {
 	 * @return the value as a String, may be <code>null</code> if there is none, or
 	 *         empty string.
 	 */
-	public final String getValue() {
+	public String getValue() {
 		return this.value;
 	}
 
@@ -115,7 +115,7 @@ public class Option implements Serializable {
 	 * @return the descriptive String, may be <code>null</code> if there is none, or
 	 *         empty string.
 	 */
-	public final String getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
@@ -125,7 +125,7 @@ public class Option implements Serializable {
 	 * @return the name as a String. This will neither be <code>null</code> nor an
 	 *         empty string.
 	 */
-	public final String getName() {
+	public String getName() {
 		return this.optionName;
 	}
 }

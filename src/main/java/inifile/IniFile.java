@@ -48,7 +48,7 @@ import java.util.Map;
  * @author and copyright (C) Wolfgang Lenerz 2011-2015
  */
 @SuppressWarnings("serial")
-public class IniFile implements Serializable {
+public final class IniFile implements Serializable {
 
 	/**
 	 * The map that contains the options.
@@ -104,7 +104,7 @@ public class IniFile implements Serializable {
 	 *             any exception when reading the file or
 	 *             <code>FileNotFoundException</code> if file can't be found.
 	 */
-	public final void readIniFile() throws IOException {
+	public void readIniFile() throws IOException {
 		readIniFile(true);
 	}
 
@@ -126,7 +126,7 @@ public class IniFile implements Serializable {
 	 *             any exception when reading the file or
 	 *             <code>FileNotFoundException</code> if file can't be found.
 	 */
-	public final void readIniFile(final boolean optionMustPreExist) throws IOException {
+	public void readIniFile(final boolean optionMustPreExist) throws IOException {
 		readIniFile(defaultFilename, optionMustPreExist);
 	}
 
@@ -146,7 +146,7 @@ public class IniFile implements Serializable {
 	 *             any IOException when reading the file or FileNotFoundException if
 	 *             file can't be found.
 	 */
-	public final void readIniFile(final String filename) throws IOException {
+	public void readIniFile(final String filename) throws IOException {
 		readIniFile(filename, true);
 	}
 
@@ -169,7 +169,7 @@ public class IniFile implements Serializable {
 	 *             any IOException when reading the file or FileNotFoundException if
 	 *             file can't be found.
 	 */
-	public final void readIniFile(final String filename, final boolean optionMustPreExist) throws IOException {
+	public void readIniFile(final String filename, final boolean optionMustPreExist) throws IOException {
 		readIniFile(new File(filename), optionMustPreExist);
 	}
 
@@ -187,7 +187,7 @@ public class IniFile implements Serializable {
 	 *             any exception when reading the file or FileNotFoundException if
 	 *             file can't be found.
 	 */
-	public final void readIniFile(final File file) throws IOException {
+	public void readIniFile(final File file) throws IOException {
 		readIniFile(file, true);
 	}
 
@@ -209,7 +209,7 @@ public class IniFile implements Serializable {
 	 *             any exception when reading the file or FileNotFoundException if
 	 *             file can't be found.
 	 */
-	public final void readIniFile(final File file, final boolean optionMustPreExist) throws IOException {
+	public void readIniFile(final File file, final boolean optionMustPreExist) throws IOException {
 		// if the file as such doesn't exist try it with that name in the user's home
 		// dir
 		File rdFile = file;
@@ -264,7 +264,7 @@ public class IniFile implements Serializable {
 	 * the format option_name = option_value.
 	 * <p>
 	 */
-	public final void writeIniFileNoError() {
+	public void writeIniFileNoError() {
 		try {
 			if (defaultFilename != null && !defaultFilename.isEmpty()) {
 				writeIniFile(new File(defaultFilename));
@@ -286,7 +286,7 @@ public class IniFile implements Serializable {
 	 * @throws IOException
 	 *             IOException on file operation failures
 	 */
-	public final void writeIniFile() throws FileNotFoundException, IOException {
+	public void writeIniFile() throws FileNotFoundException, IOException {
 		if (defaultFilename == null) {
 			throw new FileNotFoundException();
 		}
@@ -305,7 +305,7 @@ public class IniFile implements Serializable {
 	 * @throws IOException
 	 *             - any IO exception from file operations.
 	 */
-	public final void writeIniFile(final String filename) throws IOException {
+	public void writeIniFile(final String filename) throws IOException {
 		writeIniFile(new File(filename));
 	}
 
@@ -321,7 +321,7 @@ public class IniFile implements Serializable {
 	 * @throws IOException
 	 *             - any IO exception from file operations.
 	 */
-	public final void writeIniFile(final File file) throws IOException {
+	public void writeIniFile(final File file) throws IOException {
 		try (PrintStream sout = new PrintStream(new FileOutputStream(file))) {
 			for (Option option : options.values()) {
 				sout.println("# " + option.getDescription()); // write the comment first
@@ -347,7 +347,7 @@ public class IniFile implements Serializable {
 	 * @throws IllegalArgumentException
 	 *             if the option name is null or empty.
 	 */
-	public final void addOption(final String optionName, final String value, final String description) {
+	public void addOption(final String optionName, final String value, final String description) {
 		if (optionName == null || optionName.isEmpty()) {
 			throw new IllegalArgumentException("Option name  must not be null or empty");
 		}
@@ -364,7 +364,7 @@ public class IniFile implements Serializable {
 	 * @throws IllegalArgumentException
 	 *             if the option is null.
 	 */
-	public final void addOption(final Option option) {
+	public void addOption(final Option option) {
 		if (option == null) {
 			throw new IllegalArgumentException("Option must not be null");
 		}
@@ -379,7 +379,7 @@ public class IniFile implements Serializable {
 	 * @param option
 	 *            the option to set and containing the new values.
 	 */
-	public final void changeOption(final Option option) {
+	public void changeOption(final Option option) {
 		if (option != null && checkOptionExists(option.getName())) {
 			addOption(option);
 		}
@@ -395,7 +395,7 @@ public class IniFile implements Serializable {
 	 * @param value
 	 *            the value of the option.
 	 */
-	public final void setOptionValue(final String optionName, final String value) {
+	public void setOptionValue(final String optionName, final String value) {
 		Option option = getOption(optionName);
 		if (option != null) {
 			option.setValue(value);
@@ -412,7 +412,7 @@ public class IniFile implements Serializable {
 	 * @param description
 	 *            the description of the option.
 	 */
-	public final void setOptionDescription(final String optionName, final String description) {
+	public void setOptionDescription(final String optionName, final String description) {
 		Option option = getOption(optionName);
 		if (option != null) {
 			option.setDescription(description);
@@ -427,7 +427,7 @@ public class IniFile implements Serializable {
 	 *
 	 * @return true if this option exists, else false.
 	 */
-	public final boolean checkOptionExists(final String optionName) {
+	public boolean checkOptionExists(final String optionName) {
 		return getOption(optionName) != null;
 	}
 
@@ -440,7 +440,7 @@ public class IniFile implements Serializable {
 	 * @return the option value as a string. May be <code>null</code> or an empty
 	 *         String. If the option doesn't exist <code>null</code> is returned.
 	 */
-	public final String getOptionValue(final String optionName) {
+	public String getOptionValue(final String optionName) {
 		Option option = getOption(optionName);
 		return option == null ? null : option.getValue();
 	}
@@ -455,7 +455,7 @@ public class IniFile implements Serializable {
 	 * @return the option value as a trimmed string. May be <code>null</code> or an
 	 *         empty String.
 	 */
-	public final String getTrimmedOptionValue(final String optionName) {
+	public String getTrimmedOptionValue(final String optionName) {
 		String value = getOptionValue(optionName);
 		return value == null ? null : value.trim();
 	}
@@ -469,7 +469,7 @@ public class IniFile implements Serializable {
 	 * @return the option value as a string. May be <code>null</code> or an empty
 	 *         String.
 	 */
-	public final String getLowerCasedOptionValue(final String optionName) {
+	public String getLowerCasedOptionValue(final String optionName) {
 		String value = getTrimmedOptionValue(optionName);
 		return value == null ? null : value.toLowerCase();
 	}
@@ -487,7 +487,7 @@ public class IniFile implements Serializable {
 	 *
 	 * @return the int of the option or that of the default value.
 	 */
-	public final int getOptionAsInt(final String optionName, final int defaultValue) {
+	public int getOptionAsInt(final String optionName, final int defaultValue) {
 		String value = getTrimmedOptionValue(optionName);
 		if (value == null) {
 			return defaultValue;
@@ -520,7 +520,7 @@ public class IniFile implements Serializable {
 	 * @return <code>true</code> if the option value is one of the above, else
 	 *         <code>false</code>.
 	 */
-	public final boolean getTrueOrFalse(final String optionName) {
+	public boolean getTrueOrFalse(final String optionName) {
 		String value = getOptionValue(optionName);
 		if (value != null) {
 			for (String s : IniFile.TRUE_VALUES) {
@@ -540,7 +540,7 @@ public class IniFile implements Serializable {
 	 *
 	 * @return the option, or null if it doesn't exists.
 	 */
-	public final Option getOption(final String optionName) {
+	public Option getOption(final String optionName) {
 		if (optionName == null || optionName.isEmpty()) {
 			return null;
 		}
@@ -556,7 +556,7 @@ public class IniFile implements Serializable {
 	 * @param args
 	 *            the command line arguments.
 	 */
-	public final void parseCommandLine(final String[] args) {
+	public void parseCommandLine(final String[] args) {
 		String[] opts;
 		for (String cla : args) {
 			cla = cla.trim();
@@ -577,7 +577,7 @@ public class IniFile implements Serializable {
 	 * @param filename
 	 *            the filename for the ".ini" file.
 	 */
-	public final void setFilename(final String filename) {
+	public void setFilename(final String filename) {
 		this.defaultFilename = filename;
 	}
 
@@ -586,7 +586,7 @@ public class IniFile implements Serializable {
 	 *
 	 * @return the filename for the ".ini" file.
 	 */
-	public final String getFilename() {
+	public String getFilename() {
 		return defaultFilename;
 	}
 }
